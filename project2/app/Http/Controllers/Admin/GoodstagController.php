@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class GoodsController extends Controller
+class GoodstagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        return view('admin.goods.list');
+        return view('admin.goodstag.list');
     }
 
     /**
@@ -26,7 +26,7 @@ class GoodsController extends Controller
      */
     public function create()
     {
-        return view('admin.goods.add');
+        //
     }
 
     /**
@@ -59,7 +59,7 @@ class GoodsController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.goods.edit');
+        //
     }
 
     /**
