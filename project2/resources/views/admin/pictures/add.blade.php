@@ -142,7 +142,7 @@
 
 
 <!--_footer 作为公共模版分离出去-->
-@include('admin.public.foot')
+@include('admin.public.footer')
 <script type="text/javascript">
 function article_save(){
 	alert("刷新父级的时候会自动关闭弹层。")
