@@ -14,18 +14,30 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 // 图片管理模块路由
 Route::resource('admin/pictures','admin\picturesController');
-// 前台用户查看模块
+//商品管理
+Route::resource('admin/goods','admin\GoodsController');
+//商品品牌管理
+Route::resource('admin/goodstag','admin\GoodstagController');
+//商品分类管理列表
+Route::resource('admin/goodscates','admin\GoodscatesController');
+//会员管理列表
 Route::resource('admin/homeuser','admin\HomeuserController');
-// 后台管理员用户模块
+//管理员管理列表
 Route::resource('admin/user','admin\UserController');
-// 后台首页
+
+
+
+//主页
 Route::resource('admin','admin\IndexController');
 
 Route::get('welcome',function(){
 	return view('Admin.welcome');
 });
+
+
 Route::resource('admin/cate','admin\CatesController');
 // Route::resource('admin/user','admin\UserController');
 Route::get('test',function(){

@@ -17,12 +17,12 @@
 			</dd>
 		</dl>
 		<dl id="menu-product">
-			<dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe620;</i> 商品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="product-brand.html" data-title="品牌管理" href="javascript:void(0)">品牌管理</a></li>
-					<li><a data-href="product-category.html" data-title="分类管理" href="javascript:void(0)">分类管理</a></li>
-					<li><a data-href="product-list.html" data-title="产品管理" href="javascript:void(0)">产品管理</a></li>
+					<li><a data-href="{{ url('admin/goodscates')}}" data-title="分类管理" href="javascript:void(0)">分类管理</a></li>
+					<li><a data-href="{{ url('admin/goodstag')}}" data-title="品牌管理" href="javascript:void(0)">品牌管理</a></li>
+					<li><a data-href="{{ url('admin/goods')}}" data-title="商品管理" href="javascript:void(0)">商品管理</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -39,12 +39,14 @@
 			<dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="{{ url('admin/homeuser') }} " data-title="会员列表" href="javascript:;">会员列表</a></li>
-					<li><a data-href="member-del.html" data-title="删除的会员" href="javascript:;">删除的会员</a></li>
-					<li><a data-href="member-level.html" data-title="等级管理" href="javascript:;">等级管理</a></li>
+
+					<li><a data-href="{{ url('admin/homeuser')}}" data-title="会员列表" href="javascript:;">会员列表</a></li>
+					<!-- <li><a data-href="member-del.html" data-title="删除的会员" href="javascript:;">删除的会员</a></li> -->
+					<!-- <li><a data-href="member-level.html" data-title="等级管理" href="javascript:;">等级管理</a></li> -->
+
 					<li><a data-href="member-scoreoperation.html" data-title="积分管理" href="javascript:;">积分管理</a></li>
-					<li><a data-href="member-record-browse.html" data-title="浏览记录" href="javascript:void(0)">浏览记录</a></li>
-					<li><a data-href="member-record-download.html" data-title="下载记录" href="javascript:void(0)">下载记录</a></li>
+					<li><a data-href="member-record-browse.html" data-title="收藏记录" href="javascript:void(0)">收藏记录</a></li>
+					<!-- <li><a data-href="member-record-download.html" data-title="下载记录" href="javascript:void(0)">下载记录</a></li> -->
 					<li><a data-href="member-record-share.html" data-title="分享记录" href="javascript:void(0)">分享记录</a></li>
 				</ul>
 			</dd>
@@ -53,9 +55,9 @@
 			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="{{ url('admin/user/create') }}" data-title="添加管理员" href="javascript:void(0)">添加管理员</a></li>
-					<li><a data-href="admin-permission.html" data-title="权限管理" href="javascript:void(0)">权限管理</a></li>
 					<li><a data-href="{{ url('admin/user') }}" data-title="管理员列表" href="javascript:void(0)">管理员列表</a></li>
+					<li><a data-href="{{ url('admin/user/create') }}" data-title="添加管理员" href="javascript:void(0)">添加管理员</a></li>
+					<!-- <li><a data-href="admin-permission.html" data-title="权限管理" href="javascript:void(0)">权限管理</a></li> -->
 				</ul>
 			</dd>
 		</dl>

@@ -6,3 +6,4 @@
 <script type="text/javascript" src="{{ asset('admins/lib/My97DatePicker/4.8/WdatePicker.js')}}"></script> 
 <script type="text/javascript" src="{{ asset('admins/lib/datatables/1.10.0/jquery.dataTables.min.js')}}"></script> 
 <script type="text/javascript" src="{{ asset('admins/lib/laypage/1.2/laypage.js')}}"></script>
+
