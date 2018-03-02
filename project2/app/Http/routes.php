@@ -14,8 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('admin','Admin\IndexController');
+Route::resource('admin/user','admin\UserController');
+Route::resource('admin','admin\IndexController');
 
 Route::get('welcome',function(){
 	return view('Admin.welcome');
+});
+Route::resource('admin/cate','admin\CatesController');
+// Route::resource('admin/user','admin\UserController');
+Route::get('test',function(){
+	return view('layouts.admin');
 });

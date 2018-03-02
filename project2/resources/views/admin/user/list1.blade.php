@@ -1,4 +1,4 @@
-
+﻿
 @extends('layouts.admin')
 
 @section('title','后台首页')
@@ -18,7 +18,7 @@
 	<div id="iframe_box" class="Hui-article">
 		<div class="show_iframe">
 			<div style="display:none" class="loading"></div>
-			<iframe scrolling="yes" frameborder="0" src="{{url('welcome')}} "></iframe>
+			<iframe scrolling="yes" frameborder="0" src="{{url('user.list2')}} "></iframe>
 	</div>
 </div>
 </section>
