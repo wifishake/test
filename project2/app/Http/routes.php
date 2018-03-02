@@ -14,7 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+// 图片管理模块路由
+Route::resource('admin/pictures','admin\picturesController');
+// 前台用户查看模块
+Route::resource('admin/homeuser','admin\HomeuserController');
+// 后台管理员用户模块
 Route::resource('admin/user','admin\UserController');
+// 后台首页
 Route::resource('admin','admin\IndexController');
 
 Route::get('welcome',function(){

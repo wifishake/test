@@ -50,7 +50,7 @@
 @include('admin.public.footer')
 
 @yield('script')
-<script type="text/javascript" src="lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
+<script type="text/javascript" src="{{ asset('admins/lib/jquery.contextmenu/jquery.contextmenu.r2.js')}}"></script>
 <script type="text/javascript">
 $(function(){
 	/*$("#min_title_list li").contextMenu('Huiadminmenu', {
