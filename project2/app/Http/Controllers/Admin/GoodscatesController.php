@@ -16,6 +16,7 @@ class GoodscatesController extends Controller
      */
     public function index()
     {
+        
         return view('admin.goodscates.list');
     }
 
@@ -26,6 +27,7 @@ class GoodscatesController extends Controller
      */
     public function create()
     {
+
        return view('admin.goodscates.add');
     }
 
@@ -37,7 +39,9 @@ class GoodscatesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->except('_token');
+
+
     }
 
     /**
