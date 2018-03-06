@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//订单管理模块路由
+Route::resource('admin/orders','admin\OrdersController');
 // 图片管理模块路由
 Route::resource('admin/pictures','admin\picturesController');
 //商品管理
