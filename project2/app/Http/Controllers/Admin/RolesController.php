@@ -1,39 +1,39 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Model\Users;
 use App\Model\Roles;
+use App\Model\Permission;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+class RolesController extends Controller
 {
-    /**
-     * 管理员授权
+     /**
+     * 授权页面
      *
      * @return \Illuminate\Http\Response
      */
-    public function auth($id)
-    {
-       // 根据id获取角色
-        $users = Users::find($id);
+     public function auth($id)
+     {
+        // 根据id获取角色
+        $roles = Roles::find($id);
         // dd($roles);
         // 获取所有权限
-        $roles = Roles::get();
+        $perms = Permission::get();
         // dd($perms);
         // 获取此角色拥有的权限
-        $own_roles = $users->roles;
+        $own_perms = $roles->permission;
         // dd($own_perms);
-        $own_rol = [];
-        foreach ($own_roles as $v)
+        $own_per = [];
+        foreach ($own_perms as $v)
         {
-            $own_rol[] = $v->id;
+            $own_per[] = $v->id;
         }
 
-        return view('admin.user.auth',compact('roles','users','own_rol')); 
-    }
+        return view('admin.roles.auth',compact('roles','perms','own_per'));
+     }
       /**
      * 授权处理
      *
@@ -45,14 +45,14 @@ class UserController extends Controller
        $input = $request->except('_token');
        // 2.保存数据到关联表中
         // 删除原有授权
-       \DB::table('abbr_h_j')->where('uid',$input['user_id'])->delete();
+       \DB::table('abbr_j_q')->where('rid',$input['role_id'])->delete();
        // 重新添加授权
-       if(!empty($input['rol_id'])){
-            foreach ($input['rol_id'] as $v) {
-             \DB::table('abbr_h_j')->insert(['uid'=>$input['user_id'],'rid'=>$v]);
+       if(!empty($input['perm_id'])){
+            foreach ($input['perm_id'] as $v) {
+             \DB::table('abbr_j_q')->insert(['rid'=>$input['role_id'],'nid'=>$v]);
         }
        }
-        return redirect('admin/user');
+        return redirect('admin/roles');
       }
     /**
      * Display a listing of the resource.
@@ -61,10 +61,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = Users::get();
         $roles = Roles::get();
-        // dd($users);
-        return view('admin.user.list',compact('users'));
+        return view('admin/roles/list',compact('roles'));
     }
 
     /**
@@ -74,7 +72,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.add');
+         return view('admin/roles/add');
     }
 
     /**
@@ -85,7 +83,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->except('_token');
+
+        $res = Roles::create($input);
+        if($res){
+            return redirect('admin/roles');
+        }else{
+            return back();
+        }
     }
 
     /**
@@ -96,7 +101,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return 'show';
     }
 
     /**
@@ -107,7 +112,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.user.edit');
+
+        $roles = Roles::find($id);
+         return view('admin/roles/edit',compact('roles'));
     }
 
     /**
@@ -119,7 +126,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       // dd($id);
+         //根据id,获取要修改的用户
+        $roles = Roles::find($id);
+
+        //将用户的相关属性修改为用户提交的值
+        $input = $request->all();
+        // dd($input);
+        $res = $roles->update(['role_name'=>$input['role_name']]);
+
+        if($res){
+            return redirect('admin/roles');
+        }else{
+            return back();
+        }
     }
 
     /**
@@ -130,6 +150,20 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // 找到要删除的记录，并删除
+       $res = Roles::find($id)->delete();
+        if($res){
+            $data = [
+                'status'=>0,
+                'msg'=>'删除成功'
+            ];
+        }else{
+            $data = [
+                'status'=>1,
+                'msg'=>'删除失败'
+            ];
+        }
+
+        return $data;
     }
 }
