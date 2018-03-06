@@ -25,9 +25,24 @@ Route::resource('admin/goodstag','admin\GoodstagController');
 Route::resource('admin/goodscates','admin\GoodscatesController');
 //会员管理列表
 Route::resource('admin/homeuser','admin\HomeuserController');
+//管理员路由
+//    给角色授权
+    Route::get('admin/user/auth/{id}','admin\UserController@auth');
+//    处理授权的路由
+    Route::post('admin/user/doauth','admin\UserController@doAuth');
 //管理员管理列表
 Route::resource('admin/user','admin\UserController');
+// 权限管理
+Route::resource('admin/permission','admin\PermissionController');
 
+//    角色模块路由
+//    给角色授权
+    Route::get('admin/roles/auth/{id}','admin\RolesController@auth');
+//    处理授权的路由
+    Route::post('admin/roles/doauth','admin\RolesController@doAuth');
+    Route::resource('role','RoleController');
+// 角色管理
+Route::resource('admin/roles','admin\RolesController');
 
 
 //主页

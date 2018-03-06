@@ -57,6 +57,18 @@
 				<ul>
 					<li><a data-href="{{ url('admin/user') }}" data-title="管理员列表" href="javascript:void(0)">管理员列表</a></li>
 					<li><a data-href="{{ url('admin/user/create') }}" data-title="添加管理员" href="javascript:void(0)">添加管理员</a></li>
+					<li><a data-href="{{ url('admin/roles') }}" data-title="角色列表" href="javascript:void(0)">角色列表</a></li>
+					<li><a data-href="{{ url('admin/roles/create') }}" data-title="添加角色" href="javascript:void(0)">添加角色</a></li>
+					<!-- <li><a data-href="admin-permission.html" data-title="权限管理" href="javascript:void(0)">权限管理</a></li> -->
+				</ul>
+			</dd>
+		</dl>
+		<dl id="menu-admin">
+			<dt><i class="Hui-iconfont">&#xe62d;</i> 权限管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="{{ url('admin/permission') }}" data-title="权限列表" href="javascript:void(0)">权限列表</a></li>
+					<li><a data-href="{{ url('admin/permission/create') }}" data-title="添加权限" href="javascript:void(0)">添加权限</a></li>
 					<!-- <li><a data-href="admin-permission.html" data-title="权限管理" href="javascript:void(0)">权限管理</a></li> -->
 				</ul>
 			</dd>

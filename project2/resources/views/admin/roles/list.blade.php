@@ -22,10 +22,10 @@
 <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<title>管理员列表</title>
+<title>角色列表</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 角色管理 <span class="c-gray en">&gt;</span> 角色列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	<div class="text-c"> 日期范围：
 		<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}' })" id="datemin" class="input-text Wdate" style="width:120px;">
@@ -34,44 +34,39 @@
 		<input type="text" class="input-text" style="width:250px" placeholder="输入管理员名称" id="" name="">
 		<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="admin_add('添加管理员','{{url('admin/user/create')}}','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="admin_add('添加角色','{{url('admin/roles/create')}}','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加角色</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
 	<table class="table table-border table-bordered table-bg">
 		<thead>
 			<tr>
-				<th scope="col" colspan="9">员工列表</th>
+				<th scope="col" colspan="9">角色列表</th>
 			</tr>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
 				<th width="40">ID</th>
-				<th width="150">登录名</th>
-				<th width="90">手机</th>
+				<th width="150">角色名称</th>
 				<th width="100">操作</th>
 			</tr>
 		</thead>
 		<tbody>
-			@foreach($users as $v)
+			@foreach($roles as $v)
 			<tr class="text-c">
+			  {{ csrf_field() }}
 				<td><input type="checkbox" value="1" name=""></td>
-				<td>{{$v->id}} </td>
-				<td>{{$v->nickname}} </td>
-				<td>{{$v->tel}} </td>
+				<td>{{ $v->id}} </td>
+				<td>{{ $v->role_name}} </td>
 				<td class="td-manage">
-					<a title="授权"  href="{{ url('admin/user/auth/'.$v->id) }}">
-	                <i class="layui-icon">授权</i>
-	              	</a>
-					<a style="text-decoration:none" onClick="admin_stop(this,'10001')" href="javascript:;" title="停用">
-					<i class="Hui-iconfont">&#xe631;</i>
-					</a> 
-					<a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','{{ url('admin/user/1/edit') }}','1','800','500')" class="ml-5" style="text-decoration:none">
-					<i class="Hui-iconfont">&#xe6df;</i>
-					</a> 
-					<a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5" style="text-decoration:none">
-					<i class="Hui-iconfont">&#xe6e2;</i>
-					</a>
+				 <a title="授权"  href="{{ url('admin/roles/auth/'.$v->id) }}">
+                <i class="layui-icon">授权</i>
+              	</a>
+				<a title="角色编辑" href="javascript:;" onclick="admin_edit('角色编辑','{{ url('admin/roles/'.$v->id.'/edit') }}',1,'800','500')" class="ml-5" style="text-decoration:none">
+				<i class="Hui-iconfont">&#xe6df;</i>
+				</a>
+				<a title="删除" href="javascript:;" onclick="del(this,'{{ $v->id}} ')" class="ml-5" style="text-decoration:none">
+				<i class="Hui-iconfont">&#xe6e2;</i>
+				</a>
 				</td>
 			</tr>
 			@endforeach
-			
 		</tbody>
 	</table>
 </div>
@@ -103,7 +98,7 @@ function admin_del(obj,id){
 	layer.confirm('确认要删除吗？',function(index){
 		$.ajax({
 			type: 'POST',
-			url: '',
+			url: '{{ url('admin/roles/') }}/'+id,
 			dataType: 'json',
 			success: function(data){
 				$(obj).parents("tr").remove();
@@ -115,7 +110,42 @@ function admin_del(obj,id){
 		});		
 	});
 }
+// 角色删除
+  function del(obj,id){
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+              // $.post('URL地址'.'携带的参数',成功后的闭包函数)
+              $.post('{{ url('admin/roles/') }}/'+id,{"_token":"{{csrf_token()}}","_method":"delete","id":id},function(data){
+                  if(data.status == 0){
+                      $(obj).parents("tr").remove();
+                      layer.msg('已删除!',{icon:1,time:1000});
+                      location.reload(true);
+                  }else{
+                      layer.msg('删除失败!',{icon:1,time:1000});
+                      location.reload(true);
+                  }
+              });
 
+          });
+      }
+// 角色修改
+// function admin_edit(obj,id){
+//           layer.confirm('确认要修改吗？',function(index){
+//               //发异步删除数据
+//               // $.post('URL地址'.'携带的参数',成功后的闭包函数)
+//               $.post("admin/roles/"+ id +"/edit",{"_token":"{{csrf_token()}}","_method":"delete","id":id},function(data){
+//                   if(data.status == 0){
+//                       $(obj).parents("tr").remove();
+//                       layer.msg('已删除!',{icon:1,time:1000});
+//                       location.reload(true);
+//                   }else{
+//                       layer.msg('删除失败!',{icon:1,time:1000});
+//                       location.reload(true);
+//                   }
+//               });
+
+//           });
+//       }
 /*管理员-编辑*/
 function admin_edit(title,url,id,w,h){
 	layer_show(title,url,w,h);
