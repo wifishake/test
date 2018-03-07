@@ -58,3 +58,13 @@ Route::resource('admin/cate','admin\CatesController');
 Route::get('test',function(){
 	return view('layouts.admin');
 });
+
+
+
+// 前台
+Route::resource('home/regist','Home\RegistController');
+
+
+
+
+Route::resource('home','Home\IndexController');

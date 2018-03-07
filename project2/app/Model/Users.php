@@ -19,4 +19,5 @@ class Users extends Model
     {
     	return $this->belongsToMany('App\Model\Roles', 'abbr_h_j', 'uid', 'rid');
     }
+   
 }
